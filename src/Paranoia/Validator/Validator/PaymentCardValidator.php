@@ -17,7 +17,7 @@ class PaymentCardValidator extends AbstractValidator
         $weight = 2;
         $number = $card->getNumber();
         $length = strlen($number);
-        for($i = $length -2; $i >= 0; $i--) {
+        for ($i = $length -2; $i >= 0; $i--) {
             $digit = $weight * $number[$i];
             $sum += floor($digit / 10) + $digit % 10;
             $weight = $weight % 2 + 1;
@@ -34,9 +34,9 @@ class PaymentCardValidator extends AbstractValidator
     private function validateExpireDate(PaymentCard $card)
     {
         $cardExpireTime = strtotime(
-            date('Y-m-t', strtotime(sprintf('%d-%02d-1', $card->getExpireYear(), $card->getExpireMonth()))
-            ));
-        if(strtotime(date('Y-m-d')) > $cardExpireTime) {
+            date('Y-m-t', strtotime(sprintf('%d-%02d-1', $card->getExpireYear(), $card->getExpireMonth())))
+        );
+        if (strtotime(date('Y-m-d')) > $cardExpireTime) {
             throw new ValidationError('Card is expired');
         }
     }

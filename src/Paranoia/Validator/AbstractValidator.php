@@ -21,15 +21,17 @@ abstract class AbstractValidator implements ValidatorInterface
     protected function checkValidators(array $validators)
     {
         foreach ($validators as $validator) {
-            if(!class_exists($validator)) {
+            if (!class_exists($validator)) {
                 throw new ImplementationError($validator .' class does not exists.');
             }
 
             $refClass = new \ReflectionClass($validator);
 
-            if(!$refClass->implementsInterface('\\Paranoia\\ValidatorInterface')) {
-                throw new ImplementationError($validator .' must be implementation ' .
-                    'of \Paranoia\ValidatorInterface');
+            if (!$refClass->implementsInterface('\\Paranoia\\ValidatorInterface')) {
+                throw new ImplementationError(
+                    $validator .' must be implementation ' .
+                    'of \Paranoia\ValidatorInterface'
+                );
             }
         }
     }
@@ -38,35 +40,35 @@ abstract class AbstractValidator implements ValidatorInterface
       * @param array $validators
       * @throws ImplementationError
       */
-     protected function setValidators(array $validators)
-     {
+    protected function setValidators(array $validators)
+    {
         $this->checkValidators($validators);
-         $this->validators = $validators;
-     }
+        $this->validators = $validators;
+    }
 
     /**
      * @param $validatorName
      * @throws ImplementationError
      */
-     public function addValidator($validatorName)
-     {
-         $this->checkValidators(array($validatorName));
-         $this->validators[] = $validatorName;
-     }
+    public function addValidator($validatorName)
+    {
+        $this->checkValidators(array($validatorName));
+        $this->validators[] = $validatorName;
+    }
 
-     /**
-      * @param TransferInterface $object
-      * @throws \Paranoia\Exception\ValidationError
-      * @return bool
-      */
-     public function validate(TransferInterface $object)
-     {
-         $this->checkValidators($this->validators);
-         foreach($this->validators as $validatorName) {
-             /** @var \Paranoia\ValidatorInterface $validator */
-             $validator = new $validatorName($this);
-             $validator->validate($object);
-         }
-         return true;
-     }
- }
+    /**
+     * @param TransferInterface $object
+     * @throws \Paranoia\Exception\ValidationError
+     * @return bool
+     */
+    public function validate(TransferInterface $object)
+    {
+        $this->checkValidators($this->validators);
+        foreach ($this->validators as $validatorName) {
+            /** @var \Paranoia\ValidatorInterface $validator */
+            $validator = new $validatorName($this);
+            $validator->validate($object);
+        }
+        return true;
+    }
+}

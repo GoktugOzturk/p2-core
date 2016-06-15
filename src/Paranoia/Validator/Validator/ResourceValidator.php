@@ -15,7 +15,7 @@ class ResourceValidator extends AbstractValidator
     public function validate(TransferInterface $object)
     {
         $this->validator->validate($object);
-        if(!$object->getResource() instanceof ResourceInterface) {
+        if (!$object->getResource() instanceof ResourceInterface) {
             throw new ValidationError('Resource does not have a valid resource.');
         }
         return true;

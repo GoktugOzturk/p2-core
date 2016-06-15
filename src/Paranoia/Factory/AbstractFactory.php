@@ -35,7 +35,7 @@ abstract class AbstractFactory implements FactoryInterface
      */
     private function getObjectName($objectClass, $objectType)
     {
-        if(!static::VENDOR_NAME) {
+        if (!static::VENDOR_NAME) {
             throw new ImplementationError('VENDOR_NAME constant must be declared in implementation class.');
         }
 
@@ -70,7 +70,7 @@ abstract class AbstractFactory implements FactoryInterface
     public function createBuilder($builderType)
     {
         $builder = $this->getBuilder($builderType);
-        if(!class_exists($builder)) {
+        if (!class_exists($builder)) {
             throw new ImplementationError("${builderType} is not implemented yet!");
         }
         return new $builder($this->getConfig());
@@ -84,7 +84,7 @@ abstract class AbstractFactory implements FactoryInterface
     public function createProcessor($processorType)
     {
         $processor = $this->getProcessor($processorType);
-        if(!class_exists($processor)) {
+        if (!class_exists($processor)) {
             throw new ImplementationError("${processorType} is not implemented yet!");
         }
         return new $processor($this->getConfig());

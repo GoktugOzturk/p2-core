@@ -14,7 +14,7 @@ class AmountValidator extends AbstractValidator
     public function validate(TransferInterface $object)
     {
         $this->validator->validate($object);
-        if(!is_numeric($object->getAmount())) {
+        if (!is_numeric($object->getAmount())) {
             throw new ValidationError('Amount must have a numeric value.');
         }
         return true;

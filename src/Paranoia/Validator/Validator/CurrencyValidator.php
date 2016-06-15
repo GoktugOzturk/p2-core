@@ -15,7 +15,7 @@ class CurrencyValidator extends AbstractValidator
     public function validate(TransferInterface $object)
     {
         $this->validator->validate($object);
-        if(!$object->getCurrency() instanceof Currency) {
+        if (!$object->getCurrency() instanceof Currency) {
             throw new ValidationError('Currency is not set properly.');
         }
         return true;
