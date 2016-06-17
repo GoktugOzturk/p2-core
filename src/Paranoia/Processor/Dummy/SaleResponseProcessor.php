@@ -1,10 +1,9 @@
 <?php
-namespace Paranoia\Processor\Null;
+namespace Paranoia\Processor\Dummy;
 
-use Paranoia\Processor\AbstractProcessor;
-use Paranoia\Transfer\Response\NullResponse;
+use Paranoia\Transfer\Response\SaleResponse;
 
-class NullResponseProcessor extends AbstractProcessor
+class SaleResponseProcessor extends AbstractDummyProcessor
 {
     /**
      * @param mixed $rawResponse
@@ -12,7 +11,7 @@ class NullResponseProcessor extends AbstractProcessor
      */
     protected function prepareResponse($rawResponse)
     {
-        return new NullResponse();
+        return new SaleResponse();
     }
 
     /**
