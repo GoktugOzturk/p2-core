@@ -1,8 +1,8 @@
 <?php
 namespace Paranoia\Helper\Http;
 
-use Guzzle\Http\Client as HttpClient;
-use Guzzle\Http\Exception\RequestException;
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\RequestException;
 use Paranoia\Exception\ConnectionError;
 
 class Client
@@ -16,15 +16,13 @@ class Client
     public static function post($url, array $data)
     {
         $client = new HttpClient();
-        $client->setConfig(array(
-            'curl.options' => array(
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false,
-            )
-        ));
-        $request = $client->post($url, null, $data);
+
         try {
-            return $request->send()->getBody();
+            $response = $client->post($url, [
+                'body'      => $data,
+                'verify'    => false,
+            ]);
+            return new HttpResponse($response->getStatusCode(), $response->getBody());
         } catch (RequestException $e) {
             throw new ConnectionError('Communication failed: ' . $url);
         }

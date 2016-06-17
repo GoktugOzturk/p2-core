@@ -4,6 +4,7 @@ namespace Paranoia\Adapter;
 use Paranoia\AdapterInterface;
 use Paranoia\BuilderInterface;
 use Paranoia\ConfigurationInterface;
+use Paranoia\FactoryInterface;
 use Paranoia\ProcessorInterface;
 use Paranoia\Transfer\Request\CancelRequest;
 use Paranoia\Transfer\Request\PostAuthorizationRequest;
@@ -27,9 +28,10 @@ abstract class AbstractAdapter implements AdapterInterface
      * AbstractAdapter constructor.
      * @param \Paranoia\ConfigurationInterface $config
      */
-    public function __construct(ConfigurationInterface $config)
+    public function __construct(ConfigurationInterface $config, FactoryInterface $factory)
     {
         $this->config = $config;
+        $this->factory = $factory;
     }
 
     /**
@@ -47,7 +49,6 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return $this->factory;
     }
-
 
     /**
      * @param \Paranoia\Transfer\Request\SaleRequest $request

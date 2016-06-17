@@ -1,10 +1,9 @@
 <?php
-namespace Paranoia\Builder\Null;
+namespace Paranoia\Builder\Dummy;
 
-use Paranoia\Builder\AbstractBuilder;
 use Paranoia\Transfer\RequestInterface;
 
-class NullRequestBuilder extends AbstractBuilder
+class PostAuthorizationRequestBuilder extends AbstractDummyBuilder
 {
     /**
      * @param \Paranoia\Transfer\RequestInterface $request
